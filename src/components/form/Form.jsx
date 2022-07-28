@@ -8,6 +8,7 @@ const Form = () => {
         title: "",
         body: "",
       });
+
     const [users, setUsers] = useState([
         {
           id: 1,
@@ -17,6 +18,8 @@ const Form = () => {
         },
       ]);
       
+      
+
     const { title, body } = inputs;
     const nextId = useRef(4);
     
@@ -26,15 +29,16 @@ const Form = () => {
         ...inputs,
         [name]: value,
     });
+  
     };
-    
-      const onCreate = () => {
+
+    const onCreate = () => {
         const user = {
-          id: nextId.current,
-          title,
-          body,
+            id: nextId.current,
+            title,
+            body,
+            isdone: false
         };
-    
         setUsers([...users, user]);
     
         setInputs({
@@ -43,10 +47,23 @@ const Form = () => {
           isDone: false
         });
         nextId.current += 1;
-        
-    }
-
+    }; 
     
+
+
+    const onRemove = (id) => {
+        setUsers(users.filter((user) => user.id !== id));
+    };
+
+    const onToggle = (id) => {
+        setUsers(
+            users.map((user) =>
+            user.id === id ? { ...user, isDone: !user.isDone } : user
+            )
+        );
+    };
+
+
    
     return (
         <>
@@ -68,10 +85,11 @@ const Form = () => {
                 <button className="btn1" onClick={onCreate}>추가하기</button>
         
             </div>
-        <List users={users} setUsers={setUsers} />
+        <List users={users} title={title} body={body} setUsers={setUsers} onChange={onChange} onRemove={onRemove} onCreate={onCreate} onToggle={onToggle} />
         </>
         
-   )
-    }
+    );
+
+};
 
   export {Form};

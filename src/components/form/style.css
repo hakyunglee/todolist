@@ -4,6 +4,7 @@
     justify-content: space-between;
     margin: 0 auto;
     padding: 30px;
+    display: flex;
     
     /* background-color: gainsboro;
     border-radius: 5px;
