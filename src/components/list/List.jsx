@@ -22,25 +22,26 @@ const List = ({users, onRemove, onToggle}) => {
                         <p>{a.body}</p>
                         <button className="todo-delete-button button" onClick={()=>{onRemove(a.id)}}>삭제하기</button>
                         <button className="todo-complete-button button"onClick={()=> {onToggle(a.id)}}>완료</button>
-                        </div> )
+                        </div> ) 
                     )
                 })
                 
                 }
             </div>         
 
-
-
             <div className="Done">
                 <h2>Done..!</h2>
             </div>   
-            {users.map(a=>(a.isDone ===true ?(<div className="todo-container" key={a.id} done="true">
+            {
+            users.map(a=>(a.isDone ===true ?(<div className="todo-container" key={a.id} >
                 <h2>{a.title}</h2>
                 <p>{a.body}</p>
                 <button className="todo-delete-button button" onClick={()=>{onRemove(a.id)}}>삭제하기</button>
                 <button className="todo-complete-button button"onClick={()=> {onToggle(a.id)}}>취소</button>
                 </div> ):null
-                ))}
+                ))
+                
+                }
         
 
          
