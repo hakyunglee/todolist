@@ -46,6 +46,19 @@ const Form = () => {
         
     }
 
+    const onRemove = (id) => {
+      setUsers(users.filter((user) => user.id !== id));
+  };
+
+  const onToggle = (id) => {
+      setUsers(
+          users.map((user) =>
+          user.id === id ? { ...user, isDone: !user.isDone } : user
+          )
+      );
+  };
+
+
     
     return (
         <>
@@ -67,7 +80,7 @@ const Form = () => {
                 <button className="btn1" onClick={onCreate}>추가하기</button>
         
             </div>
-        <List users={users} setUsers={setUsers} />
+        <List users={users} tilte={title} body={body} setUsers={setUsers} onChange={onChange} onToggle={onToggle} onRemove={onRemove} onCreate={onCreate} />
         </>
         
    )
