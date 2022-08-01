@@ -1,57 +1,73 @@
 import React from "react";
-import "./style.css"
+import "./style.css";
 
+const List = ({ users, onRemove, onToggle }) => {
+  console.log(users);
 
-const List = ({users, setUsers}) => {
-    const onRemove = (id) => {
-        setUsers(users.filter((users) => users.id !== id));
-      };
-    
-      
-      console.log(users.Id);
+  return (
+    <div className="list-container">
+      <div className="working">
+        <h2>Working.. 🔥</h2>
+        {users.map((a) => {
+          if (!a.isDone) {
+            return (
+              <div className="todo-container" key={a.id} done="false">
+                <h2>{a.title}</h2>
+                <p>{a.body}</p>
+                <button
+                  className="todo-delete-button button"
+                  onClick={() => {
+                    onRemove(a.id);
+                  }}
+                >
+                  삭제하기
+                </button>
+                <button
+                  className="todo-complete-button button"
+                  onClick={() => {
+                    onToggle(a.id);
+                  }}
+                >
+                  완료
+                </button>
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
+      </div>
 
-    
+      <div className="Done">
+        <h2>Done..!</h2>
+      </div>
+      {users.map((a) =>
+        a.isDone === true ? (
+          <div className="todo-container" key={a.id}>
+            <h2>{a.title}</h2>
+            <p>{a.body}</p>
+            <button
+              className="todo-delete-button button"
+              onClick={() => {
+                onRemove(a.id);
+              }}
+            >
+              삭제하기
+            </button>
+            <button
+              className="todo-complete-button button"
+              onClick={() => {
+                onToggle(a.id);
+              }}
+            >
+              취소
+            </button>
+          </div>
+        ) : null
+      )}
 
-    return (
-        <div className="list-container">
-            <h2 className="list-title">Working.. 🔥</h2>
-                <div className="list-wrapper">
-                    {users.map ((users) => {
-                        return (
-                            <div key={users.Id} className="todo-container">
-                                <div>
-                                    <h2 className="todo-title">{users.title}</h2>
-                                    <div>{users.body}</div>
-                                </div>
-                                <div>
-                                    <button className="todo-delete-button button" onClick={() => {onRemove(users.id)}}>삭제하기</button>
-                                    <button className="todo-complete-button button" onClick={()=>{users=true}}>완료</button>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
+    </div>
+  );
+};
 
-
-            <h2 className="list-title">Done..!</h2>
-                <div className="list-wrapper">
-                    <div className="todo-container">
-                        <div>
-                            <h2 className="todo-title">리액트 공부하기</h2>
-                            <div>리액트 기초를 공부해봅시다.</div>
-                        </div>
-                        <div>
-                            <button className="todo-delete-button button" onClick={() => {onRemove(users.id)}}>삭제하기</button>
-                            <button className="todo-complete-button button">취소</button>
-                        </div>
-                    </div>
-                </div>
-            
-        </div>
-    );
-        
-}
-  export {List};
-
-
-
+export { List };
