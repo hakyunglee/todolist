@@ -8,7 +8,6 @@ const Form = () => {
         title: "",
         body: "",
       });
-
     const [users, setUsers] = useState([
         {
           id: 1,
@@ -18,8 +17,6 @@ const Form = () => {
         },
       ]);
       
-      
-
     const { title, body } = inputs;
     const nextId = useRef(4);
     
@@ -29,16 +26,15 @@ const Form = () => {
         ...inputs,
         [name]: value,
     });
-  
     };
-
-    const onCreate = () => {
+    
+      const onCreate = () => {
         const user = {
-            id: nextId.current,
-            title,
-            body,
-            isdone: false
+          id: nextId.current,
+          title,
+          body,
         };
+    
         setUsers([...users, user]);
     
         setInputs({
@@ -47,24 +43,23 @@ const Form = () => {
           isDone: false
         });
         nextId.current += 1;
-    }; 
-    
-
+        
+    }
 
     const onRemove = (id) => {
-        setUsers(users.filter((user) => user.id !== id));
-    };
+      setUsers(users.filter((user) => user.id !== id));
+  };
 
-    const onToggle = (id) => {
-        setUsers(
-            users.map((user) =>
-            user.id === id ? { ...user, isDone: !user.isDone } : user
-            )
-        );
-    };
+  const onToggle = (id) => {
+      setUsers(
+          users.map((user) =>
+          user.id === id ? { ...user, isDone: !user.isDone } : user
+          )
+      );
+  };
 
 
-   
+    
     return (
         <>
             <div className="form-box">
@@ -85,11 +80,10 @@ const Form = () => {
                 <button className="btn1" onClick={onCreate}>추가하기</button>
         
             </div>
-        <List users={users} title={title} body={body} setUsers={setUsers} onChange={onChange} onRemove={onRemove} onCreate={onCreate} onToggle={onToggle} />
+        <List users={users} tilte={title} body={body} setUsers={setUsers} onChange={onChange} onToggle={onToggle} onRemove={onRemove} onCreate={onCreate} />
         </>
         
-    );
-
-};
+   )
+    }
 
   export {Form};
